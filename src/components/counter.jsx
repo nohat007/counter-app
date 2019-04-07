@@ -2,7 +2,31 @@ import React, { Component } from "react";
 
 class Counter extends Component {
   state = {
-    count: 0
+    count: 0,
+    tag: ["nohat", "irvo", "nolly"]
+  };
+
+  //constructor() {
+  //super();
+  //this.handleIncrement = this.handleIncrement.bind(this);
+  //}
+
+  renderTags() {
+    if (this.state.tag.length === 0) {
+      return <h2>No tags</h2>;
+    } else {
+      return (
+        <ul>
+          {this.state.tag.map(ace => (
+            <li key={ace}>{ace}</li>
+          ))}
+        </ul>
+      );
+    }
+  }
+
+  handleIncrement = () => {
+    this.setState({ count: this.state.count + 1 });
   };
 
   render() {
@@ -11,10 +35,16 @@ class Counter extends Component {
     // let classes = this.getClass();
 
     return (
-      <React.Fragment>
+      <div>
         <span className={this.getClass()}>{this.formatCount()}</span>
-        <button className="btn btn-secondary btn-sm">Increment</button>
-      </React.Fragment>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sm"
+        >
+          Increment
+        </button>
+      </div>
+      // {this.renderTags()} was inside to render LI
     );
   }
 
@@ -29,6 +59,8 @@ class Counter extends Component {
     const { count } = this.state;
     return count === 0 ? "Zero" : count;
   }
+  // <span className={this.getClass()}>{this.formatCount()}</span> had em both in before
+  // <button className="btn btn-secondary btn-sm">Increment</button>
 }
 
 export default Counter;
